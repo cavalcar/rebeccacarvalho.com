@@ -1,0 +1,52 @@
+!DOCTYPE_MODULO(`
+
+p,
+li {
+    font-size: 18px;
+}
+img {
+    margin: 5px;
+    padding: 5px;
+    max-width: 60%;
+    float: left;
+}
+
+h1 {
+    font-size: 50px;
+    padding: 20px;
+    border-bottom: 5px solid var(--color);
+    background-color: var(--color);
+    color: white;
+}
+
+h2 {
+    font-size: 22px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+.out-now {
+    font-family: var(--cursive-font);
+    font-size: 30px;
+    left: -50px;
+    top: -60px;
+    position: relative;
+    color: var(--color);
+}
+
+.out-now::before {
+    content: '\u2936';
+    font-family: monospace;
+    font-size: 80px;
+    display: inline-block;
+    color: var(--color);
+    left: 50px;
+    top: 60px;
+    position: relative;
+}
+
+
+
+`)

@@ -1,0 +1,18 @@
+!DOCTYPE_MODULO(`
+{
+    "list": [
+        {
+            "title": "Writing",
+            "file": "index.html"
+        },
+        {
+            "title": "About Rebecca",
+            "file": "about.html"
+        },
+        {
+            "title": "Contact",
+            "file": "contact.html"
+        }
+    ]
+}
+`)
