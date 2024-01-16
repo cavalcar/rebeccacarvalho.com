@@ -2,11 +2,16 @@
 {
     "list": [
         {
-            "title": "Writing",
-            "file": "index.html"
+            "title": "Rebecca Carvalho",
+            "file": "index.html",
+            "style": "home"
         },
         {
-            "title": "About Rebecca",
+            "title": "Writing",
+            "file": "writing.html"
+        },
+        {
+            "title": "About",
             "file": "about.html"
         },
         {

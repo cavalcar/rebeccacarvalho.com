@@ -2,10 +2,9 @@
 
 .field-pair,
 button {
-    border: 3px solid var(--color-fg);
+    border: 3px solid var(--color-outline-semilight);
     border-top-width: 2px;
     border-bottom-width: 4px;
-    box-shadow: 3px 3px var(--color-outline-semi);
     border-radius: 4px;
     width: 60%;
     margin-left: 20%;
@@ -14,22 +13,28 @@ button {
 
 .field-pair {
     display: grid;
-    grid-template-columns: 100px 1fr;
+    grid-template-columns: 130px 1fr;
     padding: 10px;
 }
 
 .field-pair > * {
     border: none;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     padding: 5px;
-    font-family: sans-serif;
+    font-weight: normal;
+    font-family: var(--serif-font);
+}
+.field-pair > :first-child {
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 button {
+    font-family: var(--serif-font);
     background-color: var(--color);
     color: white;
     margin-left: 20%;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     text-transform: uppercase;
     padding: 10px;

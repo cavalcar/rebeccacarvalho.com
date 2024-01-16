@@ -24,27 +24,35 @@
     {% endcomment %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="./static/css/site.css" />
 
 </head>
 <body>
     <nav class="page-nav">
         <ul>
-                <li class="page-li--home">
-                    <a class="page-nav-link page-nav-link--home" style="font-family: var(--cursive-font)" href="/">
-                        Rebecca Carvalho
-                    </a>
-                </li>
+            <li class="collapse-button">
+                <a 
+                    class="collapse-button-a"
+                    onClick="this.parentNode.parentNode.parentNode.classList.toggle('collapsed')"
+                    >
+                    &#x2630;
+                </a>
+            </li>
             {% for link in links_pages.list %}
-                <li class="{% if link.file == props.navselected %}page-li--selected{% endif %}">
+                <li class="
+                        {% if link.file == props.navselected %}page-li--selected{% endif %}
+                        {% if link.style %}page-li--{{ link.style }}{% endif %}
+                    ">
                     <a href="{{ link.file }}"
                         title="{{ link.title }}"
                         class="
                             page-nav-link
                             {% if link.file == props.navselected %}page-nav-link--selected{% endif %}
+                            {% if link.style %}page-nav-link--{{ link.style }}{% endif %}
                         ">
-                        {{ link.title|upper }}
+                        {{ link.title }}
                     </a>
                 </li>
             {% endfor %}
@@ -117,10 +125,12 @@
     <footer class="page-footer">
         &bull; {% for link in links_pages.list %}
             <a href="{{ link.file }}">{{ link.title }}</a> &bull;
-        {% endfor %} <br />
-        &copy; {{ script.currentYear }} All Rights Reserved by Page Author
+        {% endfor %} 
         <!-- Feel free to delete this: -->
-        &bull; <a href="https://modulojs.org/" title="Made with Modulo.js" target="_blank">%</a>
+         <a href="https://modulojs.org/" title="Made with <3 & Modulo.js" target="_blank">%</a>
+        &bull;
+        <br />
+        &copy; {{ script.currentYear }} All Rights Reserved by Rebecca Carvalho
     </footer>
 </body>
 
