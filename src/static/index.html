@@ -7,6 +7,7 @@
 -->
 <Component name="Page" mode="vanish-into-document">
     <Props
+        contentstyle
         pagetitle
         showarticles
         navselected
@@ -14,11 +15,11 @@
     ></Props>
     <StaticData
         -name="links_pages"
-        -src="./data/links/pages.json"
+        -src="./data/pages.js"
     ></StaticData>
     <StaticData
         -name="links_articles"
-        -src="./data/links/articles.json"
+        -src="./data/articles.js"
     ></StaticData>
     <Template
         -src="./components/Page/Page.html"
@@ -32,9 +33,61 @@
         prefix=".page-content"
         -src="./components/Page/Page-content.css"
     ></Style>
-    <Script
-        -src="./components/Page/Page.js"
-    ></Script>
+    <Script>
+        modulo.register('util', function switchLang(requestedLanguage) {
+            let fn = window.location.pathname.split('/').pop();
+            fn = fn.includes('.') ? fn.split('.')[0] : fn;
+
+            links_pages.pt2en = Object.fromEntries(Object.entries(links_pages.en2pt).map(r => [ r[1], r[0] ]));
+            links_articles.pt2en = Object.fromEntries(Object.entries(links_articles.en2pt).map(r => [ r[1], r[0] ]));
+            // Attempt redirect to respective page
+            const obj = Object.assign({}, links_pages.pt2en, links_articles.pt2en, links_pages.en2pt, links_articles.en2pt);
+            if (!(fn in obj)) {
+                fn = 'index'; // switch to default
+            }
+            // Attempt to redirect to correct page
+            let translatedPath = '../' + requestedLanguage + '/' + obj[fn] + '.html';
+            localStorage.setItem('requested-lang', requestedLanguage);
+            window.location.href = translatedPath;
+        });
+
+        // Add custom, one-off JavaScript here for Page files
+        function getLang() {
+            if (localStorage.getItem('requested-lang')) {
+                return localStorage.getItem('requested-lang');
+            }
+            if (navigator.languages != undefined) {
+                for (const lang of navigator.languages) {
+                    if (lang.toLowerCase().includes('pt')) {
+                        return 'pt';
+                    }
+                }
+            }
+            return 'en';
+        }
+
+        function prepareCallback() {
+            // Get the current year on every render of the page
+            const params = new window.URLSearchParams(window.location.search)
+            const requestedLanguage = params.get('lang') || getLang();
+            const currentLanguage = String(window.location).includes('/en/') ? 'en' : 'pt';
+
+            const pages = links_pages[currentLanguage];
+            const articles = links_articles[currentLanguage];
+
+            if (requestedLanguage  !== currentLanguage) {
+                modulo.registry.utils.switchLang(requestedLanguage);
+            }
+
+            return {
+                requestedLanguage,
+                currentLanguage,
+                articles,
+                pages,
+                currentYear: (new Date()).getFullYear(),
+            };
+        }
+    </Script>
 </Component>
 
 <Component name="ContactForm" mode="vanish">
