@@ -196,7 +196,8 @@ hr {
 }
 
 .out-now::before {
-    content: '\u2936';
+    /*content: ' \ u 2936';*/
+    content: '⤶';
     font-family: monospace;
     font-size: 80px;
     display: inline-block;

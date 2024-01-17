@@ -1,4 +1,4 @@
-!DOCTYPE_MODULO(JSON.stringify(
+!DOCTYPE_MODULO(`
 {
 
     en2pt: {
@@ -64,4 +64,4 @@
 
 
 }
-))
+`)
