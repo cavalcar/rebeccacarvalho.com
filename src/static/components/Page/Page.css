@@ -2,7 +2,7 @@
 
 /* Store CSS variables in :host selector, accessible to styles in Page.html */
 :host {
-    --footer-height: 100px;
+    --footer-height: 150px;
     --navbar-height: 68px;
     --logo-width: 50px;
     --logo-height: 50px;
@@ -16,13 +16,18 @@
     --color-content-bg-semi: #EEEEEECC;
     --color-outline: #111;
     --color-outline-semi: #00000088;
+    --color-outline-semidark: #000000ba;
     --color-outline-semilight: #00000033;
     --cursive-font: 'Tangerine';
     --serif-font: 'Goudy Bookletter 1911';
 }
 
+
+
 .container {
-    background: url('../../images/recife-bg-ground-zero-2014135_1920.jpg');
+    background: 
+      url('../../images/recife-bg-ground-zero-2014135_1920.jpg') repeat-x,
+      linear-gradient(to bottom, var(--color), #eee);
 }
 
 /* Create simple layout with a 1200px max-width for content on desktop */
@@ -40,23 +45,8 @@
 
 .page-container {
     min-height: calc(100vh - var(--footer-height) - var(--navbar-height));
-    margin-top: 80px;
 }
 
-
-.page-content {
-    border: 1px solid var(--color-outline-semilight);
-    background: var(--color-content-bg);
-    /*border-radius: 0 5px 5px 5px;*/
-    border-radius: 10px;
-    padding: 0;
-    padding-bottom: 60px;
-    margin: 10px;
-    margin-top: 100px;
-    box-shadow: 
-        -15px -15px 50px 0 inset var(--color-outline-semilight),
-        5px 5px 10px 5px var(--color-outline-semi);
-}
 
 .page-nav {
     position: fixed;
@@ -123,10 +113,12 @@ li.page-li--home {
 }
 
 .page-nav-link--home {
-    font-size: 40px;
+    font-size: 55px;
+    line-height: 0.6;
     border: none;
     font-weight: 400;
     padding: 0;
+    margin-right: 20px;
     font-family: var(--cursive-font)
 }
 
@@ -134,11 +126,14 @@ li.page-li--home {
     color: var(--color-alt2)
 }
 
+li.page-li--home .page-nav-link--selected {
+    color: white;
+}
 
 .page-footer {
     height: var(--footer-height);
     text-align: center;
-    padding-top: 30px;
+    padding-top: 100px;
     background: var(--color-content-bg-semi);
     color: var(--color-outline-semi);
 }
@@ -174,9 +169,8 @@ li.page-li--home {
     left: 0;
     cursor: pointer;
     user-select: none;
-    line-height: 0.1;
-    padding: 0;
-    padding-bottom: 20px !important;
+    line-height: 0.8;
+    padding: 2px;
     border: 3px solid var(--color-alt);
     transition: border-color 0.2s, color 0.2s;
 }
@@ -210,7 +204,10 @@ li.page-li--home {
     padding: 5px;
     display: flex;
     align-items: center;
+    justify-content: center;
     transition: opacity 0.2s;
+    height: 34px;
+    min-width: 100px;
 }
 .language-switcher img {
     height: 24px;
@@ -235,10 +232,14 @@ li.page-li--home {
         border-radius: 0 0 2px 0;
         transition: border-radius 0.2s;
     }
+    .page-nav.collapsed .language-switcher {
+        display: none;
+    }
+
     .page-nav.collapsed,
     .page-nav.collapsed > ul {
-        height: 80px;
-        width: 80px;
+        height: 100px;
+        width: 100px;
         border-radius: 0 0 80px 0;
     }
     .page-nav.collapsed > ul > * {
@@ -257,12 +258,7 @@ li.page-li--home {
     .page-nav li {
         border-radius: 100px;
     }
-    .page-content {
-        margin: -1px;
-        margin-top: 300px;
-        padding: 2px;
-        width: 100%;
-    }
+    
 
     .page-nav-link {
         color: var(--color-content-bg);
@@ -286,6 +282,7 @@ li.page-li--home {
     }
 
     .page-nav-link--home {
+        margin-top: 40px;
         border: none;
         width: 100vw;
         font-size: 55px;

@@ -9,15 +9,23 @@
     },
 
     en: [
+
         {
             title: "Rebecca Carvalho",
             file: "index.html",
             style: "home",
         },
+
+
         {
+            title: "Salt and Sugar",
+            file: "index.html",
+        },
+
+        /*{
             title: "Writing",
             file: "writing.html"
-        },
+        },*/
         {
             title: "About",
             file: "about.html"
@@ -34,10 +42,16 @@
             file: "index.html",
             style: "home"
         },
+
         {
+            //title: "Livro",
+            title: "Sal e Açúcar",
+            file: "index.html",
+        },
+        /*{
             title: "Artigos",
             file: "artigos.html"
-        },
+        },*/
         {
             title: "Biografia",
             file: "biografia.html"

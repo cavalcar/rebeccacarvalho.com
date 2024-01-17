@@ -12,6 +12,7 @@ html {
     padding: 0;
     overflow-x: hidden;
     max-width: 100%;
+    background: #eee;
 }
 
 body * {

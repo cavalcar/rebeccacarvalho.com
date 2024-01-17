@@ -1,0 +1,19 @@
+{
+    "name": "rebeccacarvalho.com",
+    "version": "0.0.0",
+    "private": true,
+    "description": "...a new project...",
+    "scripts": {
+        "start": "npm exec -y http-server -- -p 3334 -e html src/",
+        "startcms": "cd src && npm exec -y netlify-cms-proxy-server",
+        "build": "modulocli ssg -f"
+    },
+    "modulo": {
+        "isCopyOnly": "^static$",
+        "output": "build",
+        "input": "src"
+    },
+    "dependencies": {
+        "mdu.js": "0.0.72"
+    }
+}

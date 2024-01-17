@@ -30,7 +30,7 @@
 
 </head>
 <body>
-    <nav class="page-nav">
+    <nav class="page-nav collapsed"> <!-- Start collapsed on mobile -->
         <ul>
             <li class="collapse-button">
                 <a 
@@ -76,14 +76,14 @@
         <div class="language-switcher">
             {% if script.current-language is "en" %}
                 <a href="?lang=pt" onClick="event.preventDefault(); modulo.registry.utils.switchLang('pt')">
-                    <img height="24" src="https://flagsapi.com/BR/flat/24.png"/>
-                    <img height="24" src="https://flagsapi.com/PT/flat/24.png"/>
-                    BR PT
+                    &#x27F3;&nbsp;BR&nbsp;PT&nbsp;<img height="24" src="https://flagsapi.com/BR/flat/24.png"/>
+                    <!--<img height="24" src="https://flagsapi.com/PT/flat/24.png"/>-->
                 </a>
             {% else %}
                 <a href="?lang=en" onClick="event.preventDefault(); modulo.registry.utils.switchLang('en')">
-                    <img height="24" src="https://flagsapi.com/US/flat/24.png"/>
-                    <img height="24" src="https://flagsapi.com/GB/flat/24.png"/>
+                    &#x27F3;
+                    <!--<img height="24" src="https://flagsapi.com/US/flat/24.png"/>
+                    <img height="24" src="https://flagsapi.com/GB/flat/24.png"/>-->
                     US EN
                 </a>
             {% endif %}
@@ -110,31 +110,26 @@
         </main>
 
         {% if props.showarticles %}
-            <nav class="article-nav">
-                <ul>
-                    {% for link in script.articles %}
-                        <li class="{% if link.file == props.navselected %}page-li--selected{% endif %}">
-                                <a
-                                    href="{{ link.file }}"
-                                    title="{{ link.title }}"
-                                    class="page-nav-link {% if link.file == props.navselected %}page-nav-link--selected{% endif %}"
-                                    style="background: var(--color); color: white; font-size: 1.6rem"
-                                >
-                                    <span style="min-width: 250px; display: inline-block">{{ link.title }}</span>
-                                    <span style="margin-left: 5px; font-weight: normal; font-size: 1.4rem;">
+            <nav class="page-content">
+                <h2 style="margin: 50px">Continue reading</h2>
+                <section style="margin-top: 0">
+                    <ul>
+                        {% for link in script.articles %}
+                            <li style="width: 100%">
+                                <a href="{{ link.file }}" title="{{ link.title }}" style="display: flex; width: 80%;">
+                                    <span >{{ link.title }}</span>
+                                    <span >
                                         {{ link.byline }}
                                     </span>
-                                    <span style="margin: 11px; float: right; margin-top: -18px; opacity: 0.9">
-                                        <span style="font-size: 1.1rem; font-weight: normal;">
-                                            {{ link.estimate }}
-                                        </span><br />
+                                    <span >
                                         <span style="font-size: 1.1rem">READ MORE</span>
                                         &raquo;
                                     </span>
-                            </a>
-                        </li>
-                    {% endfor %}
-              </ul>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
             </nav>
         {% endif %}
     </div>
@@ -142,7 +137,7 @@
     <footer class="page-footer">
         &bull; {% for link in script.pages %}
             <a href="{{ link.file }}">{{ link.title }}</a> &bull;
-        {% endfor %} 
+        {% endfor %}
         <!-- Feel free to delete this: -->
          <a href="https://modulojs.org/" title="Made with <3 & Modulo.js" target="_blank">%</a>
         &bull;

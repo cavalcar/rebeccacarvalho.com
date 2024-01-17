@@ -1,5 +1,19 @@
 !DOCTYPE_MODULO(`
 
+section {
+    border: 1px solid var(--color-outline-semilight);
+    background: var(--color-content-bg);
+    /*border-radius: 0 5px 5px 5px;*/
+    border-radius: 10px;
+    padding: 0;
+    padding-bottom: 30px;
+    margin: 10px;
+    margin-top: 220px;
+    box-shadow: 
+        -15px -15px 50px 0 inset var(--color-outline-semilight),
+        5px 5px 10px 5px var(--color-outline-semi);
+}
+
 p,
 li {
     font-size: 21px;
@@ -22,31 +36,154 @@ img.floating {
         2px 2px 4px 1px var(--color-outline-semilight);
 }
 
+img.cutout {
+    float: left;
+    margin-top: -148px;
+    height: 300px;
+}
+
+
+img.cutout--bigger {
+    float: left;
+    margin-top: -198px;
+    height: 350px;
+}
+
 h1 {
     font-size: 80px;
     padding: 20px;
     background-color: var(--color);
-    color: white;
     font-weight: bold;
     color: var(--color-alt2);
+    text-shadow: 1px 1px 25px var(--color-content-bg-semi);
     text-align: center;
     font-family: var(--cursive-font);
     margin: -1px;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     box-shadow: -15px 0 30px 0 inset var(--color-outline-semilight);
 }
 
-img ~ h1 {
+img ~ h1,
+a ~ h1 {
     text-align: left;
 }
 
 h2 {
-    font-size: 22px;
+    font-size: 80px;
+    line-height: 0.5;
+    float: left;
+    color: var(--color-outline-semi);
+    text-shadow: 0 0 1px var(--color-outline-semilight);
+    font-family: var(--cursive-font);
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+    margin-top: 20px;
 }
+
+ul {
+    display: inline-block;
+}
+
+ul li {
+    list-style: none;
+    margin: 1px;
+    padding: 3px;
+    font-size: 24px;
+    line-height: 1;
+    text-decoration: none;
+}
+
+ul li a {
+    text-decoration: none;
+    color: var(--color);
+}
+
 
 h3 {
     font-size: 18px;
+}
+
+
+hr {
+    border: none;
+    border-top: 1px solid var(--color-outline-semilight);
+    /*border-bottom: 1px dotted var(--color-outline-semilight);*/
+    margin: 5px;
+    margin-left: 55px;
+    margin-right: 55px;
+    height: 0;
+    max-height: 0;
+}
+
+.big-quote > em  {
+    font-size: 50px;
+    padding: 0;
+    color: black;
+}
+
+.big-quote.big-quote--float span  {
+    float: right;
+    max-width: 20%;
+    line-height: 1;
+}
+
+.big-quote--centerish {
+    margin-top: -90px;
+}
+
+.big-quote--centerish em {
+    font-size: 55px;
+    margin-left: 70px;
+    padding: 0;
+}
+.big-quote--medium   {
+    font-size: 24px;
+    padding: 0;
+}
+.big-quote--medium strong  {
+    color: black;
+}
+
+
+.well-deserved-accolades {
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+    text-align: center;
+    flex-wrap: wrap;
+    max-width: 99%;
+}
+
+.well-deserved-accolades img {
+    max-width: 16%;
+    align-self: end;
+    margin-bottom: 5px;
+}
+
+.well-deserved-accolades tt {
+    font-family: serif; /* Switch to this to keep away weird numeriC font */
+    font-size: 110%; /* slight adjustment */
+}
+
+.well-deserved-accolades p {
+    font-size: 22px;
+    max-width: 16%;
+    line-height: 0.95;
+    padding: 1px;
+    margin: 1px;
+    color: var(--color-outline-semidark);
+    border-left: 1px solid var(--color-outline-semilight);
+    min-height: 120px;
+}
+.well-deserved-accolades p:first-child {
+    border-left: none;
+}
+.well-deserved-accolades strong {
+    display: block;
+    font-size: 48px;
+    color: var(--color-alt);
 }
 
 .out-now {
@@ -67,6 +204,148 @@ h3 {
     left: 50px;
     top: 60px;
     position: relative;
+}
+
+.buy-now {
+    width: 250px;
+    height: 100px;
+    float: right;
+    margin: 0;
+    margin-top: -5px;
+    margin-left: -20px;
+}
+
+.buy-now li {
+    list-style: none;
+    font-size: 24px;
+    line-height: 1;
+    text-align: right;
+    z-index: 20;
+    position: relative;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 2px;
+    padding: 2px;
+    border-right: 3px solid var(--color);
+    font-family: var(--cursive-font);
+}
+
+.buy-now li a {
+    text-decoration: none;
+    color: var(--color);
+    display: inline-block;
+}
+.buy-now li a:hover {
+    color: var(--color-alt);
+}
+.buy-now li:hover {
+    border-color: var(--color-alt);
+}
+
+.buy-now li a strong {
+    font-family: var(--serif-font);
+}
+
+.rc-Btn {
+    display: inline-block;
+    text-align: center;
+    border-radius: 5px;
+    line-height: 0.8;
+    border: 3px solid var(--color-outline-semilight);
+    border-top-width: 2px;
+    border-bottom-width: 5px;
+    background: var(--color-alt);
+    color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    z-index: 20;
+    position: relative;
+    text-decoration: none;
+    padding: 10px;
+    transition: box-shadow 0.3s;
+    box-shadow: 
+        15px 15px 50px 0 inset var(--color-alt),
+        2px 2px 4px 1px var(--color-outline-semilight);
+}
+
+.rc-Btn:hover {
+    color: var(--color-alt2);
+    box-shadow: 
+        15px 15px 50px 0 inset var(--color-alt),
+        2px 2px 4px 1px var(--color-alt2);
+}
+
+
+/* Handy layout helper */
+.u--split-2-3 {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+@media (max-width: 1200px) {
+    .well-deserved-accolades p {
+        font-size: 20px;
+        max-width: 32%;
+        width: 32%;
+        border-left: none;
+    }
+    .big-quote.big-quote--float span  {
+        float: none;
+    }
+}
+
+@media (max-width: 992px) {
+    img.cutout {
+        margin-top: -70px;
+    }
+
+    section {
+        margin: -1px;
+        margin-top: 170px;
+        padding: 2px;
+        width: 100%;
+    }
+    .out-now {
+        display: none;
+    }
+    .u--split-2-3 {
+        margin-top: 150px;
+    }
+
+}
+
+@media (max-width: 576px) {
+    h1, p, span, div, ul {
+        clear: both;
+    }
+    img.cutout {
+        margin-top: -150px;
+    }
+    img.floating {
+        float: none;
+    }
+    /* Move buy-now up */
+    .buy-now {
+        margin-top: -500px;
+    }
+    .buy-now li {
+        padding-top: 20px;
+    }
+    .buy-now li a {
+        background: var(--color);
+        color: white;
+        max-width: 150px;
+        display: inline-block;
+        padding: 10px;
+        line-height: 1.1;
+        font-size: 90%;
+    }
+    .u--split-2-3 {
+        display: block;
+    }
+    .buy-now li a small {
+        font-size: 60%;
+    }
 }
 
 
