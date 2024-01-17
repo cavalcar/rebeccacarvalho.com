@@ -130,8 +130,12 @@
 
             if (!_isBuild()) {
                 if (props.navselected === '_router_') {
-                    const home = '/' + requestedLanguage + '/';
-                    window.history.replaceState({}, '', home); // nav to lang
+                    const home = './' + requestedLanguage + '/';
+                    try {
+                        window.history.replaceState({}, '', home); // 'soft' nav
+                    } catch {
+                        window.location.href = home;
+                    }
                 } else if (requestedLanguage !== currentLanguage) {
                     modulo.registry.utils.switchLang(requestedLanguage);
                 }
