@@ -118,7 +118,7 @@
             const url = String(window.location.href).split('?')[0];
             if (params.get('lang') && !_isBuild()) {
                 localStorage.setItem(KEY, params.get('lang'));
-                window.history.replaceState({}, 'remove', url); // strip the lang= URL
+                window.history.replaceState({}, '', url); // strip the lang= URL
             }
             const requestedLanguage = getLang();
             const ptURL = modulo.registry.utils.getTranslatedPath('pt');
@@ -128,8 +128,13 @@
             const pages = links_pages[currentLanguage];
             const articles = links_articles[currentLanguage];
 
-            if (requestedLanguage !== currentLanguage && !_isBuild()) {
-                modulo.registry.utils.switchLang(requestedLanguage);
+            if (!_isBuild()) {
+                if (props.navselected === '_router_') {
+                    const home = '/' + requestedLanguage + '/';
+                    window.history.replaceState({}, '', home); // nav to lang
+                } else if (requestedLanguage !== currentLanguage) {
+                    modulo.registry.utils.switchLang(requestedLanguage);
+                }
             }
 
             return {
