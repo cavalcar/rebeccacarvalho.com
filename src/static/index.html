@@ -75,7 +75,7 @@
             }
             // Attempt to redirect to correct page
             let translatedPath = requestedLanguage + '/' + obj[fn] + '.html';
-            if (props.navselected !== '_router_') {
+            if (window.location.pathname !== '/' && props.navselected !== '_router_') {
                 translatedPath = '../' + translatedPath; // Add in "up one"
             }
             return translatedPath;
@@ -112,7 +112,13 @@
             return false;
         }
 
-        function prepareCallback() {
+        //let _handled = false;
+        function handleRedirect(doSwitch = false) {
+            if (_isBuild()) {
+                return false;
+            }
+            //if (_handled) { return false; }
+            //_handled = true;
             // Get the current year on every render of the page
             const params = new window.URLSearchParams(window.location.search)
             const url = String(window.location.href).split('?')[0];
@@ -121,25 +127,32 @@
                 window.history.replaceState({}, '', url); // strip the lang= URL
             }
             const requestedLanguage = getLang();
+            let myProps = typeof props === 'undefined' ? {} : props;
+            if (window.location.pathname === '/' || myProps.navselected === '_router_') {
+                const home = './' + requestedLanguage + '/';
+                window.location.href = home;
+                return;
+            }
+
+            if (!doSwitch) {
+                return false;
+            }
+            if (requestedLanguage !== currentLanguage && doSwitch) {
+                modulo.registry.utils.switchLang(requestedLanguage);
+            }
+        }
+        setTimeout(handleRedirect, 0);
+
+        function prepareCallback() {
+            // Get the current year on every render of the page
+            const requestedLanguage = getLang();
+            const url = String(window.location.href).split('?')[0];
             const ptURL = modulo.registry.utils.getTranslatedPath('pt');
             const enURL = modulo.registry.utils.getTranslatedPath('en');
             const currentLanguage = url.includes('/en/') ? 'en' : 'pt';
-
             const pages = links_pages[currentLanguage];
             const articles = links_articles[currentLanguage];
-
-            if (!_isBuild()) {
-                if (props.navselected === '_router_') {
-                    const home = './' + requestedLanguage + '/';
-                    try {
-                        window.history.replaceState({}, '', home); // 'soft' nav
-                    } catch {
-                        window.location.href = home;
-                    }
-                } else if (requestedLanguage !== currentLanguage) {
-                    modulo.registry.utils.switchLang(requestedLanguage);
-                }
-            }
+            handleRedirect(true);
 
             return {
                 ptURL,
