@@ -137,7 +137,8 @@
             if (!doSwitch) {
                 return false;
             }
-            if (requestedLanguage !== currentLanguage && doSwitch) {
+            const currentLanguage = url.includes('/en/') ? 'en' : 'pt';
+            if (requestedLanguage !== currentLanguage) {
                 modulo.registry.utils.switchLang(requestedLanguage);
             }
         }
