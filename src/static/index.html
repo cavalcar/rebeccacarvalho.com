@@ -1,4 +1,31 @@
 !DOCTYPE_MODULO(`
+<!-- Setup Fathom -->
+<script Configuration>
+     function setupFathom(code) {
+        // Check common things we skip -- ensure doesn't trigger during builds
+        const host = window.location.host;
+        if (host.startsWith('localhost') ||
+                host.includes('.local') ||
+                host.startsWith('127') ||
+                host.startsWith('192') ||
+                host.startsWith('dev--'))  {
+            return;
+        }
+        (function(f, a, t, h, o, m){
+            a[h]=a[h]||function(){
+                (a[h].q=a[h].q||[]).push(arguments)
+            };
+            o=f.createElement('script'),
+            m=f.getElementsByTagName('script')[0];
+            o.async=1; o.src=t; o.id='fathom-script';
+            m.parentNode.insertBefore(o,m)
+        })(document, window, '//an.michaelb.org/tracker.js', 'fathom');
+        fathom('set', 'siteId', code);
+        fathom('trackPageview');
+    }
+    setupFathom('YCPWO');
+</script>
+
 
 <!--
     This is the common "header" across all the pages on this site. Define more
@@ -61,7 +88,7 @@
 
         // Add custom, one-off JavaScript here for Page files
         function getLang() {
-            if (localStorage.getItem(KEY)) {
+            if (localStorage.getItem(KEY) && !_isBuild()) {
                 return localStorage.getItem(KEY);
             }
             if (navigator.languages != undefined) {
@@ -74,11 +101,22 @@
             return 'en';
         }
 
+        function _isBuild() {
+            // Check common things we skip -- ensure doesn't trigger during builds
+            const host = window.location.host;
+            if (host.startsWith('localhost') || host.includes('.local') ||
+                    host.startsWith('127') || host.startsWith('192') ||
+                    host.startsWith('dev--'))  {
+                return true;
+            }
+            return false;
+        }
+
         function prepareCallback() {
             // Get the current year on every render of the page
             const params = new window.URLSearchParams(window.location.search)
             const url = String(window.location.href).split('?')[0];
-            if (params.get('lang')) {
+            if (params.get('lang') && !_isBuild()) {
                 localStorage.setItem(KEY, params.get('lang'));
                 window.history.replaceState({}, 'remove', url); // strip the lang= URL
             }
@@ -90,7 +128,7 @@
             const pages = links_pages[currentLanguage];
             const articles = links_articles[currentLanguage];
 
-            if (requestedLanguage  !== currentLanguage) {
+            if (requestedLanguage !== currentLanguage && !_isBuild()) {
                 modulo.registry.utils.switchLang(requestedLanguage);
             }
 
@@ -122,5 +160,7 @@
         -src="./components/ContactForm/ContactForm.css"
     ></Style>
 </Component>
+
+
 
 `)
