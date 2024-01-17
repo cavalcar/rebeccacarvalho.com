@@ -75,12 +75,12 @@
 
         <div class="language-switcher">
             {% if script.current-language is "en" %}
-                <a href="?lang=pt" onClick="event.preventDefault(); modulo.registry.utils.switchLang('pt')">
+                <a href="{{ script.ptURL }}?lang=pt">
                     &#x27F3;&nbsp;BR&nbsp;PT&nbsp;<img height="24" src="https://flagsapi.com/BR/flat/24.png"/>
                     <!--<img height="24" src="https://flagsapi.com/PT/flat/24.png"/>-->
                 </a>
             {% else %}
-                <a href="?lang=en" onClick="event.preventDefault(); modulo.registry.utils.switchLang('en')">
+                <a href="{{ script.enURL }}?lang=en">
                     &#x27F3;
                     <!--<img height="24" src="https://flagsapi.com/US/flat/24.png"/>
                     <img height="24" src="https://flagsapi.com/GB/flat/24.png"/>-->

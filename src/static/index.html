@@ -34,7 +34,8 @@
         -src="./components/Page/Page-content.css"
     ></Style>
     <Script>
-        modulo.register('util', function switchLang(requestedLanguage) {
+        const KEY = 'requested-lang';
+        modulo.register('util', function getTranslatedPath(requestedLanguage) {
             let fn = window.location.pathname.split('/').pop();
             fn = fn.includes('.') ? fn.split('.')[0] : fn;
 
@@ -46,15 +47,22 @@
                 fn = 'index'; // switch to default
             }
             // Attempt to redirect to correct page
-            let translatedPath = '../' + requestedLanguage + '/' + obj[fn] + '.html';
-            localStorage.setItem('requested-lang', requestedLanguage);
+            let translatedPath = requestedLanguage + '/' + obj[fn] + '.html';
+            if (props.navselected !== '_router_') {
+                translatedPath = '../' + translatedPath; // Add in "up one"
+            }
+            return translatedPath;
+        });
+
+        modulo.register('util', function switchLang(requestedLanguage) {
+            const translatedPath = modulo.registry.utils.getTranslatedPath(requestedLanguage);
             window.location.href = translatedPath;
         });
 
         // Add custom, one-off JavaScript here for Page files
         function getLang() {
-            if (localStorage.getItem('requested-lang')) {
-                return localStorage.getItem('requested-lang');
+            if (localStorage.getItem(KEY)) {
+                return localStorage.getItem(KEY);
             }
             if (navigator.languages != undefined) {
                 for (const lang of navigator.languages) {
@@ -69,8 +77,15 @@
         function prepareCallback() {
             // Get the current year on every render of the page
             const params = new window.URLSearchParams(window.location.search)
-            const requestedLanguage = params.get('lang') || getLang();
-            const currentLanguage = String(window.location).includes('/en/') ? 'en' : 'pt';
+            const url = String(window.location.href).split('?')[0];
+            if (params.get('lang')) {
+                localStorage.setItem(KEY, params.get('lang'));
+                window.history.replaceState({}, 'remove', url); // strip the lang= URL
+            }
+            const requestedLanguage = getLang();
+            const ptURL = modulo.registry.utils.getTranslatedPath('pt');
+            const enURL = modulo.registry.utils.getTranslatedPath('en');
+            const currentLanguage = url.includes('/en/') ? 'en' : 'pt';
 
             const pages = links_pages[currentLanguage];
             const articles = links_articles[currentLanguage];
@@ -80,6 +95,8 @@
             }
 
             return {
+                ptURL,
+                enURL,
                 requestedLanguage,
                 currentLanguage,
                 articles,
