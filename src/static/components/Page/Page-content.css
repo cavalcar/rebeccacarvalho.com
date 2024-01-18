@@ -14,6 +14,11 @@ section {
         5px 5px 10px 5px var(--color-outline-semi);
 }
 
+a {
+    color: var(--color);
+}
+
+
 p,
 li {
     font-size: 21px;
@@ -98,6 +103,9 @@ ul li {
 ul li a {
     text-decoration: none;
     color: var(--color);
+}
+ul li a:hover {
+    text-decoration: underline;
 }
 
 
@@ -238,6 +246,7 @@ hr {
 }
 .buy-now li a:hover {
     color: var(--color-alt);
+    text-decoration: none;
 }
 .buy-now li:hover {
     border-color: var(--color-alt);
